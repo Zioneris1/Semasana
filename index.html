@@ -9,10 +9,7 @@
     <!-- Poppins for headings & Lato for body text from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /*
-        * CSS from user's template, adapted for a modern look.
-        * Using brand colors: --primary-blue: #0047AB, --accent-orange: #FF5E00
-        */
+        /* Define brand colors and fonts */
         :root {
             --primary-blue: #0047AB;
             --accent-orange: #FF5E00;
@@ -41,13 +38,14 @@
         main {
             flex-grow: 1;
         }
+        /* Page switching classes */
         .page-section {
-            display: none; /* Hide all pages by default */
+            display: none;
             opacity: 0;
             animation: fadeIn 0.5s ease-in-out forwards;
         }
         .page-section.active {
-            display: block; /* Show the active page */
+            display: block;
         }
         .nav-link.active {
             font-weight: 700;
@@ -70,7 +68,7 @@
             color: var(--white);
             text-decoration: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 9999px; /* Fully rounded pills */
+            border-radius: 9999px;
             font-size: 1.1em;
             font-weight: 500;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -81,6 +79,7 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
+        /* Homepage specific styles */
         .hero-section {
             background-image: linear-gradient(to right top, #d9eaff, #f4f6f8);
             position: relative;
@@ -88,17 +87,14 @@
             border-radius: 0 0 40px 40px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        
         .hero-content {
             animation: slideInUp 0.8s forwards;
             animation-delay: 0.2s;
         }
-
         .feature-item {
             position: relative;
             z-index: 10;
         }
-
         .feature-item::before {
             content: '';
             position: absolute;
@@ -109,45 +105,35 @@
             transition: all 0.3s ease-in-out;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
-
         .feature-item:hover::before {
             background: linear-gradient(135deg, #f0f3f6 0%, #ffffff 100%);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
-
         .mission-section {
             background-color: #f8fafc;
             border-radius: 40px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
+        .pricing-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
 
+        /* Animations */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        
         @keyframes slideInUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0) scale(1);
-            }
-            50% {
-                transform: translateY(-10px) scale(1.05);
-            }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
         }
     </style>
 </head>
@@ -236,78 +222,32 @@
                     <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Simple Pricing</h2>
                     <p class="text-lg text-gray-600 mb-12">Choose a plan that's perfect for you or your business.</p>
                     
-                    <!-- Daily Pass Card -->
-                    <div class="p-8 bg-white rounded-2xl shadow-xl flex flex-col items-center border border-gray-200 mb-12 max-w-sm mx-auto transform hover:scale-105 transition-all duration-300">
-                        <h3 class="text-2xl font-semibold text-gray-900">Daily Pass</h3>
-                        <p class="text-gray-500 mb-6">For quick, one-off usage</p>
-                        <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">$3<span class="text-lg font-medium text-gray-500">/day</span></p>
-                        <a href="#contact" class="cta-button w-full text-center">Buy Now</a>
-                        <p class="mt-4 text-sm text-gray-500">Access Semasana's premium features for 24 hours.</p>
-                    </div>
-
+                    <!-- One-time pass packages -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Plan 1: Starter -->
-                        <div class="p-8 bg-white rounded-2xl shadow-xl flex flex-col items-center border border-gray-200 transform hover:scale-105 transition-all duration-300">
-                            <h3 class="text-2xl font-semibold text-gray-900">Starter</h3>
-                            <p class="text-gray-500 mb-6">For individuals and small teams</p>
-                            <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">$9.99<span class="text-lg font-medium text-gray-500">/month</span></p>
-                            <a href="#contact" class="cta-button w-full text-center">Get Started</a>
-                            <ul class="text-left mt-6 space-y-3 text-gray-600">
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Unlimited local calls</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>100 international minutes</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Basic call forwarding</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Standard customer support</span></li>
-                            </ul>
+                        <!-- Daily Pass Card -->
+                        <div class="pricing-card p-8 bg-white rounded-2xl shadow-xl flex flex-col items-center border border-gray-200">
+                            <h3 class="text-2xl font-semibold text-gray-900">Daily Pass</h3>
+                            <p class="text-gray-500 mb-6">For quick, one-off usage</p>
+                            <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">ZAR 50<span class="text-lg font-medium text-gray-500">/day</span></p>
+                            <p class="mt-4 text-sm font-semibold text-[var(--accent-orange)]">Unlimited calls & SMS</p>
+                            <a href="#contact" class="cta-button w-full text-center mt-6">Buy Now</a>
                         </div>
-                        <!-- Plan 2: Pro -->
-                        <div class="p-8 bg-white rounded-2xl shadow-2xl flex flex-col items-center border-4 border-[var(--accent-orange)] transform scale-105 transition-all duration-300 relative z-10">
-                            <div class="absolute -top-4 bg-[var(--accent-orange)] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">Most Popular</div>
-                            <h3 class="text-2xl font-semibold text-gray-900">Pro</h3>
-                            <p class="text-gray-500 mb-6">For growing businesses</p>
-                            <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">$19.99<span class="text-lg font-medium text-gray-500">/month</span></p>
-                            <a href="#contact" class="cta-button w-full text-center">Choose Plan</a>
-                            <ul class="text-left mt-6 space-y-3 text-gray-600">
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Unlimited local calls</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>300 international minutes</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Team collaboration features</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Advanced analytics & reporting</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Priority customer support</span></li>
-                            </ul>
+                        <!-- Weekly Pass Card -->
+                        <div class="pricing-card p-8 bg-white rounded-2xl shadow-xl flex flex-col items-center border border-gray-200">
+                            <h3 class="text-2xl font-semibold text-gray-900">Weekly Pass</h3>
+                            <p class="text-gray-500 mb-6">For short-term projects</p>
+                            <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">ZAR 250<span class="text-lg font-medium text-gray-500">/week</span></p>
+                            <p class="mt-4 text-sm font-semibold text-[var(--accent-orange)]">Unlimited calls & SMS</p>
+                            <a href="#contact" class="cta-button w-full text-center mt-6">Buy Now</a>
                         </div>
-                        <!-- Plan 3: Enterprise -->
-                        <div class="p-8 bg-white rounded-2xl shadow-xl flex flex-col items-center border border-gray-200 transform hover:scale-105 transition-all duration-300">
-                            <h3 class="text-2xl font-semibold text-gray-900">Enterprise</h3>
-                            <p class="text-gray-500 mb-6">For large enterprises</p>
-                            <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">$49.99<span class="text-lg font-medium text-gray-500">/month</span></p>
-                            <a href="#contact" class="cta-button w-full text-center">Contact Us</a>
-                            <ul class="text-left mt-6 space-y-3 text-gray-600">
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Unlimited everything within Africa</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>1000 international minutes</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Dedicated account manager</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>API access</span></li>
-                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>24/7 Premium support</span></li>
-                            </ul>
+                        <!-- Monthly Pass Card -->
+                        <div class="pricing-card p-8 bg-white rounded-2xl shadow-xl flex flex-col items-center border border-gray-200">
+                            <h3 class="text-2xl font-semibold text-gray-900">Monthly Pass</h3>
+                            <p class="text-gray-500 mb-6">For regular, committed users</p>
+                            <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">ZAR 600<span class="text-lg font-medium text-gray-500">/month</span></p>
+                            <p class="mt-4 text-sm font-semibold text-[var(--accent-orange)]">Unlimited calls & SMS</p>
+                            <a href="#contact" class="cta-button w-full text-center mt-6">Buy Now</a>
                         </div>
-                    </div>
-
-                    <!-- New LLM-powered feature for pricing plan recommendation -->
-                    <div class="mt-20 p-8 bg-white rounded-2xl shadow-lg border border-gray-200 max-w-xl mx-auto text-left">
-                        <h3 class="text-2xl font-bold mb-4">Need help choosing a plan? ✨</h3>
-                        <p class="text-gray-600 mb-6">Tell us a bit about your needs, and we'll recommend the best plan for you.</p>
-                        <form id="plan-recommender-form">
-                            <div class="mb-4">
-                                <label for="team-size" class="block text-gray-700 font-semibold mb-2">Number of team members</label>
-                                <input type="number" id="team-size" name="team-size" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]" placeholder="e.g., 5" min="1" required>
-                            </div>
-                            <div class="mb-6">
-                                <label for="international-minutes" class="block text-gray-700 font-semibold mb-2">Estimated international minutes per month</label>
-                                <input type="number" id="international-minutes" name="international-minutes" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]" placeholder="e.g., 150" min="0" required>
-                            </div>
-                            <button type="button" id="recommend-button" class="cta-button w-full">
-                                Find My Perfect Plan ✨
-                            </button>
-                        </form>
-                        <div id="recommendation-result" class="mt-6 text-center p-4 rounded-lg hidden opacity-0 transition-opacity duration-300"></div>
                     </div>
                 </div>
             </div>
@@ -378,20 +318,13 @@
             const messageTextarea = document.getElementById('message');
             const draftStatus = document.getElementById('draft-status');
 
-            const teamSizeInput = document.getElementById('team-size');
-            const internationalMinutesInput = document.getElementById('international-minutes');
-            const recommendButton = document.getElementById('recommend-button');
-            const recommendationResult = document.getElementById('recommendation-result');
-
             /**
              * Function to show the correct page based on the hash in the URL.
              */
             function showPage(pageId) {
-                // Remove the 'active' class from all pages and navigation links
                 pages.forEach(page => page.classList.remove('active'));
                 navLinks.forEach(link => link.classList.remove('active'));
                 
-                // Show the target page and set the active nav link
                 const targetPage = document.getElementById(pageId + '-page');
                 const targetLink = document.querySelector(`.nav-link[href="#${pageId}"]`);
                 
@@ -515,79 +448,6 @@
 
                 draftButton.textContent = 'Help Me Draft My Message ✨';
                 draftButton.disabled = false;
-            });
-            
-            // Gemini API Integration for pricing plan recommendations
-            recommendButton.addEventListener('click', async () => {
-                const teamSize = teamSizeInput.value;
-                const internationalMinutes = internationalMinutesInput.value;
-                
-                if (!teamSize || !internationalMinutes) {
-                    recommendationResult.textContent = 'Please fill out both fields to get a recommendation.';
-                    recommendationResult.classList.remove('hidden', 'bg-green-100');
-                    recommendationResult.classList.add('bg-red-100', 'text-red-700', 'opacity-100');
-                    return;
-                }
-
-                recommendButton.textContent = 'Analyzing...';
-                recommendButton.disabled = true;
-                recommendationResult.textContent = '';
-                recommendationResult.classList.add('hidden', 'opacity-0');
-
-                const systemPrompt = "You are an AI assistant for a VoIP company named Semasana. Your task is to recommend the best pricing plan for a user based on their needs. The plans are: Starter ($9.99/month for unlimited local calls, 100 international minutes, basic call forwarding, standard customer support), Pro ($19.99/month for unlimited local calls, 300 international minutes, team collaboration, advanced analytics, priority support), Enterprise ($49.99/month for unlimited everything within Africa, 1000 international minutes, dedicated account manager, API access, 24/7 premium support). Based on the user's input, recommend the single best plan. Be brief and only provide the plan name and a single, concise sentence explaining why it's the best fit.";
-                const userQuery = `My team has ${teamSize} employees and needs around ${internationalMinutes} international minutes per month.`;
-                const apiKey = "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-                const payload = {
-                    contents: [{ parts: [{ text: userQuery }] }],
-                    systemInstruction: {
-                        parts: [{ text: systemPrompt }]
-                    },
-                };
-
-                let retries = 3;
-                while (retries > 0) {
-                    try {
-                        const response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-
-                        const result = await response.json();
-                        const generatedText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-                        
-                        if (generatedText) {
-                            recommendationResult.innerHTML = `<h4 class="font-semibold mb-1 text-lg">Recommended Plan</h4><p>${generatedText.trim()}</p>`;
-                            recommendationResult.classList.remove('hidden', 'bg-red-100');
-                            recommendationResult.classList.add('bg-blue-100', 'text-blue-700', 'opacity-100');
-                        } else {
-                            recommendationResult.textContent = 'Could not generate a recommendation. Please try again.';
-                            recommendationResult.classList.remove('hidden', 'bg-blue-100');
-                            recommendationResult.classList.add('bg-red-100', 'text-red-700', 'opacity-100');
-                        }
-                        
-                        break;
-                    } catch (error) {
-                        console.error('API call failed:', error);
-                        retries--;
-                        if (retries > 0) {
-                            await new Promise(resolve => setTimeout(resolve, 2000));
-                        } else {
-                            recommendationResult.textContent = 'Failed to get a recommendation. Please contact support.';
-                            recommendationResult.classList.remove('hidden', 'bg-blue-100');
-                            recommendationResult.classList.add('bg-red-100', 'text-red-700', 'opacity-100');
-                        }
-                    }
-                }
-                
-                recommendButton.textContent = 'Find My Perfect Plan ✨';
-                recommendButton.disabled = false;
             });
         });
     </script>
