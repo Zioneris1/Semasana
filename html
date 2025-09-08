@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semasana - Your Trusted VoIP Service</title>
+    <!-- Tailwind CSS for modern styling and responsiveness -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Poppins for headings & Lato for body text from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /*
+        * CSS from user's template, adapted for a modern look.
+        * Using brand colors: --primary-blue: #0047AB, --accent-orange: #FF5E00
+        */
+        :root {
+            --primary-blue: #0047AB;
+            --accent-orange: #FF5E00;
+            --white: #FFFFFF;
+            --light-gray: #f4f4f4;
+            --dark-text: #333;
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-gray);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 1rem;
+        }
+        main {
+            flex-grow: 1;
+        }
+        .page-section {
+            display: none; /* Hide all pages by default */
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        .page-section.active {
+            display: block; /* Show the active page */
+        }
+        .nav-link.active {
+            font-weight: 700;
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-orange);
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* Fully rounded pills */
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-section {
+            background-image: linear-gradient(to right top, #d9eaff, #f4f6f8);
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        .hero-content {
+            animation: slideInUp 0.8s forwards;
+            animation-delay: 0.2s;
+        }
+
+        .feature-item {
+            position: relative;
+            z-index: 10;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #e5e7eb 0%, #ffffff 100%);
+            border-radius: 12px;
+            z-index: -1;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-item:hover::before {
+            background: linear-gradient(135deg, #f0f3f6 0%, #ffffff 100%);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .mission-section {
+            background-color: #f8fafc;
+            border-radius: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Header and Navigation -->
+    <header class="bg-[var(--primary-blue)] text-white py-4 shadow-lg border-b-4 border-[var(--accent-orange)]">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-2 md:mb-0">Semasana</h1>
+            <nav class="space-x-4 md:space-x-8 text-sm md:text-base font-medium">
+                <a href="#home" class="nav-link text-white hover:text-gray-200 transition-colors duration-200">Home</a>
+                <a href="#pricing" class="nav-link text-white hover:text-gray-200 transition-colors duration-200">Pricing</a>
+                <a href="#contact" class="nav-link text-white hover:text-gray-200 transition-colors duration-200">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow">
+        <!-- Home Page Section -->
+        <section id="home-page" class="page-section active">
+            <div class="hero-section text-center py-20 md:py-32 rounded-b-2xl">
+                <div class="container mx-auto px-4 grid md:grid-cols-2 items-center gap-12">
+                    <div class="text-left hero-content p-4">
+                        <h2 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4 animate-slideInUp">Speak freely. Live connected.</h2>
+                        <p class="text-lg md:text-xl text-gray-600 mb-8 animate-slideInUp">Semasana is a VoIP-based communication platform designed for Africa. It's the most accessible, affordable, and reliable gateway to voice connectivity across the continent.</p>
+                        <a href="#pricing" class="cta-button">See Pricing</a>
+                    </div>
+                    <div class="relative w-full h-72 md:h-96 flex items-center justify-center p-4">
+                        <img src="https://placehold.co/400x400/0047AB/FFFFFF?text=Semasana" alt="Semasana phone graphic" class="rounded-xl shadow-2xl animate-float transition-all duration-500">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features bg-gray-100 py-16 md:py-24">
+                <div class="container mx-auto px-4 text-center">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-12">Why Choose Semasana?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-8">
+                        <!-- Feature 1 -->
+                        <div class="feature-item p-8 rounded-xl shadow-lg bg-white max-w-sm mx-auto transform hover:shadow-2xl transition-all duration-300">
+                            <div class="mx-auto mb-4 w-16 h-16 rounded-full bg-[var(--primary-blue)] text-white flex items-center justify-center p-2 transform hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.516 0 .966.351 1.091.852l1.106 4.423a1.875 1.875 0 01-.443 1.894l-3.34 3.34a1.875 1.875 0 000 2.652l3.34 3.34c.883.883 2.312.883 3.254 0a4.321 4.321 0 001.378-1.564 1.875 1.875 0 011.536-.921l4.423-1.106a1.875 1.875 0 012.03.351l3.34 3.34a1.875 1.875 0 002.652 0l3.34-3.34c.883-.883 1.35-2.022 1.35-3.237V6.75a3 3 0 00-3-3h-1.372a1.875 1.875 0 01-1.894-.443L12.376 1.106a1.875 1.875 0 01-.921-1.536V1.5a3 3 0 00-3-3H1.5zM12.376 1.106a.75.75 0 01.921-.351l1.106 4.423a.75.75 0 01-.351.921l-3.34 3.34a.75.75 0 01-.921-.351L1.876 8.35a.75.75 0 01-.351-.921L4.423 4.133a.75.75 0 01.921-.351L9.133 5.424a.75.75 0 01.351-.921L12.376 1.106zM1.5 4.5a.75.75 0 01-.75-.75V1.5a.75.75 0 011.5 0v2.25a.75.75 0 01-.75.75zm13.126 13.125a.75.75 0 01-.921.351L9.133 18.576a.75.75 0 01-.351-.921l1.106-4.423a.75.75 0 01.921-.351l3.34 3.34a.75.75 0 01.351.921l-4.423 1.106a.75.75 0 01-.921.351zM22.5 12a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5a.75.75 0 01.75.75zm-6 0a.75.75 0 01-.75.75h-3a.75.75 0 010-1.5h3a.75.75 0 01.75.75zm-6 0a.75.75 0 01-.75.75h-3a.75.75 0 010-1.5h3a.75.75 0 01.75.75z" clip-rule="evenodd" /></svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Crystal-Clear Calls</h4>
+                            <p class="text-sm text-gray-500">Our stable VoIP infrastructure ensures reliable, high-quality voice connections every time.</p>
+                        </div>
+                        <!-- Feature 2 -->
+                        <div class="feature-item p-8 rounded-xl shadow-lg bg-white max-w-sm mx-auto transform hover:shadow-2xl transition-all duration-300">
+                            <div class="mx-auto mb-4 w-16 h-16 rounded-full bg-[var(--primary-blue)] text-white flex items-center justify-center p-2 transform hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" /></svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Cross-Border Connectivity</h4>
+                            <p class="text-sm text-gray-500">Call across countries without outrageous telecom charges, connecting you with friends and family globally.</p>
+                        </div>
+                        <!-- Feature 3 -->
+                        <div class="feature-item p-8 rounded-xl shadow-lg bg-white max-w-sm mx-auto transform hover:shadow-2xl transition-all duration-300">
+                            <div class="mx-auto mb-4 w-16 h-16 rounded-full bg-[var(--primary-blue)] text-white flex items-center justify-center p-2 transform hover:scale-110 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><path d="M12 21a9.004 9.004 0 008.7-6.075M12 21v-4.5m0-9v-4.5m-8.7 6.075A9.004 9.004 0 0012 3m0-1.5a.75.75 0 01.75.75v3a.75.75 0 01-1.5 0v-3A.75.75 0 0112 1.5zm-1.5 9h3m-6 3h3m6-6h3m-3-1.5h3m-6-3h3m-3-1.5h3M3 12h3M9 15h3M9 9h3"></path></svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Scalability</h4>
+                            <p class="text-sm text-gray-500">Our platform is designed to expand into SMS, video calls, and enterprise communication in the future.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Us / Mission Section -->
+            <div class="mission-section py-16 md:py-24 mt-16">
+                <div class="container mx-auto px-4 grid md:grid-cols-2 items-center gap-12">
+                    <div>
+                         <img src="https://placehold.co/500x300/FF5E00/FFFFFF?text=African+Community" alt="Abstract representation of African communities" class="rounded-2xl shadow-xl transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="text-left p-4">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-4">Our Mission: For Africa, By Africa</h3>
+                        <p class="text-lg text-gray-600 mb-4">Our mission is to connect Africa. Our name, Semasana, is inspired by the Swahili phrase "sema sana," which means "speak a lot" or "talk freely." This name is our promise: to provide a communication platform that is accessible, affordable, and reliable.</p>
+                        <p class="text-lg text-gray-600">We are dedicated to empowering individuals and businesses across the continent to connect without limits, with a service built specifically for them.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Page Section -->
+        <section id="pricing-page" class="page-section">
+            <div class="py-20 md:py-32">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Simple Pricing</h2>
+                    <p class="text-lg text-gray-600 mb-12">Choose a plan that's perfect for you or your business.</p>
+                    
+                    <!-- Daily Pass Card -->
+                    <div class="p-8 bg-white rounded-2xl shadow-xl flex flex-col items-center border border-gray-200 mb-12 max-w-sm mx-auto transform hover:scale-105 transition-all duration-300">
+                        <h3 class="text-2xl font-semibold text-gray-900">Daily Pass</h3>
+                        <p class="text-gray-500 mb-6">For quick, one-off usage</p>
+                        <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">$3<span class="text-lg font-medium text-gray-500">/day</span></p>
+                        <a href="#contact" class="cta-button w-full text-center">Buy Now</a>
+                        <p class="mt-4 text-sm text-gray-500">Access Semasana's premium features for 24 hours.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Plan 1: Starter -->
+                        <div class="p-8 bg-white rounded-2xl shadow-xl flex flex-col items-center border border-gray-200 transform hover:scale-105 transition-all duration-300">
+                            <h3 class="text-2xl font-semibold text-gray-900">Starter</h3>
+                            <p class="text-gray-500 mb-6">For individuals and small teams</p>
+                            <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">$9.99<span class="text-lg font-medium text-gray-500">/month</span></p>
+                            <a href="#contact" class="cta-button w-full text-center">Get Started</a>
+                            <ul class="text-left mt-6 space-y-3 text-gray-600">
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Unlimited local calls</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>100 international minutes</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Basic call forwarding</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Standard customer support</span></li>
+                            </ul>
+                        </div>
+                        <!-- Plan 2: Pro -->
+                        <div class="p-8 bg-white rounded-2xl shadow-2xl flex flex-col items-center border-4 border-[var(--accent-orange)] transform scale-105 transition-all duration-300 relative z-10">
+                            <div class="absolute -top-4 bg-[var(--accent-orange)] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">Most Popular</div>
+                            <h3 class="text-2xl font-semibold text-gray-900">Pro</h3>
+                            <p class="text-gray-500 mb-6">For growing businesses</p>
+                            <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">$19.99<span class="text-lg font-medium text-gray-500">/month</span></p>
+                            <a href="#contact" class="cta-button w-full text-center">Choose Plan</a>
+                            <ul class="text-left mt-6 space-y-3 text-gray-600">
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Unlimited local calls</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>300 international minutes</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Team collaboration features</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Advanced analytics & reporting</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Priority customer support</span></li>
+                            </ul>
+                        </div>
+                        <!-- Plan 3: Enterprise -->
+                        <div class="p-8 bg-white rounded-2xl shadow-xl flex flex-col items-center border border-gray-200 transform hover:scale-105 transition-all duration-300">
+                            <h3 class="text-2xl font-semibold text-gray-900">Enterprise</h3>
+                            <p class="text-gray-500 mb-6">For large enterprises</p>
+                            <p class="text-5xl font-extrabold text-[var(--primary-blue)] mb-2">$49.99<span class="text-lg font-medium text-gray-500">/month</span></p>
+                            <a href="#contact" class="cta-button w-full text-center">Contact Us</a>
+                            <ul class="text-left mt-6 space-y-3 text-gray-600">
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Unlimited everything within Africa</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>1000 international minutes</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>Dedicated account manager</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>API access</span></li>
+                                <li class="flex items-center space-x-2"><svg class="w-4 h-4 text-[var(--accent-orange)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-2.738 4.296L16.704 12.35a.75.75 0 01-1.052.143l-4.296-2.738-4.296 2.738a.75.75 0 01-1.052-.143L3.153 12.35a.75.75 0 01.143-1.052l4.296-2.738-4.296-2.738a.75.75 0 011.052-.143l2.738 4.296L12.35 4.296a.75.75 0 01.143 1.052l-4.296 2.738 4.296 2.738a.75.75 0 01-1.052.143l-2.738-4.296-2.738 4.296a.75.75 0 01-1.052-.143z" clip-rule="evenodd" /></svg><span>24/7 Premium support</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- New LLM-powered feature for pricing plan recommendation -->
+                    <div class="mt-20 p-8 bg-white rounded-2xl shadow-lg border border-gray-200 max-w-xl mx-auto text-left">
+                        <h3 class="text-2xl font-bold mb-4">Need help choosing a plan? ✨</h3>
+                        <p class="text-gray-600 mb-6">Tell us a bit about your needs, and we'll recommend the best plan for you.</p>
+                        <form id="plan-recommender-form">
+                            <div class="mb-4">
+                                <label for="team-size" class="block text-gray-700 font-semibold mb-2">Number of team members</label>
+                                <input type="number" id="team-size" name="team-size" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]" placeholder="e.g., 5" min="1" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="international-minutes" class="block text-gray-700 font-semibold mb-2">Estimated international minutes per month</label>
+                                <input type="number" id="international-minutes" name="international-minutes" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]" placeholder="e.g., 150" min="0" required>
+                            </div>
+                            <button type="button" id="recommend-button" class="cta-button w-full">
+                                Find My Perfect Plan ✨
+                            </button>
+                        </form>
+                        <div id="recommendation-result" class="mt-6 text-center p-4 rounded-lg hidden opacity-0 transition-opacity duration-300"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page Section -->
+        <section id="contact-page" class="page-section">
+            <div class="py-20 md:py-32 bg-gray-50">
+                <div class="container mx-auto px-4 text-center max-w-xl">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h2>
+                    <p class="text-lg text-gray-600 mb-8">We'd love to hear from you. Fill out the form below and we'll get back to you shortly.</p>
+                    
+                    <form id="contact-form" class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                        <div class="mb-4">
+                            <label for="name" class="block text-left text-gray-700 font-semibold mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-left text-gray-700 font-semibold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-left text-gray-700 font-semibold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]" required></textarea>
+                        </div>
+                        
+                        <!-- LLM-powered feature for the contact form -->
+                        <div class="mb-6 border-t pt-4 border-gray-200">
+                            <label for="draft-request" class="block text-left text-gray-700 font-semibold mb-2">Need help with your message? Tell me what you want to say.</label>
+                            <div class="flex items-center space-x-2">
+                                <input type="text" id="draft-request" placeholder="e.g., 'I need help setting up my account'" class="flex-grow px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]">
+                                <button type="button" id="draft-button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md font-semibold transition-colors hover:bg-gray-300">
+                                    Help Me Draft My Message ✨
+                                </button>
+                            </div>
+                            <p id="draft-status" class="mt-2 text-sm text-gray-500 text-left"></p>
+                        </div>
+
+                        <button type="submit" class="cta-button w-full transition-all duration-300 transform hover:scale-105" id="submit-button">
+                            Send Message
+                        </button>
+                    </form>
+                    
+                    <!-- Message container for form submission -->
+                    <div id="form-message" class="mt-6 text-center text-sm font-medium p-3 rounded-md hidden opacity-0 transition-opacity duration-300"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--primary-blue)] text-white text-center py-6 shadow-lg mt-auto">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2025 Semasana. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Navigation, Form, and LLM Handling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page-section');
+            const contactForm = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+            const submitButton = document.getElementById('submit-button');
+            const draftRequestInput = document.getElementById('draft-request');
+            const draftButton = document.getElementById('draft-button');
+            const messageTextarea = document.getElementById('message');
+            const draftStatus = document.getElementById('draft-status');
+
+            const teamSizeInput = document.getElementById('team-size');
+            const internationalMinutesInput = document.getElementById('international-minutes');
+            const recommendButton = document.getElementById('recommend-button');
+            const recommendationResult = document.getElementById('recommendation-result');
+
+            /**
+             * Function to show the correct page based on the hash in the URL.
+             */
+            function showPage(pageId) {
+                // Remove the 'active' class from all pages and navigation links
+                pages.forEach(page => page.classList.remove('active'));
+                navLinks.forEach(link => link.classList.remove('active'));
+                
+                // Show the target page and set the active nav link
+                const targetPage = document.getElementById(pageId + '-page');
+                const targetLink = document.querySelector(`.nav-link[href="#${pageId}"]`);
+                
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                } else {
+                    // Default to home page if hash is invalid or not found
+                    document.getElementById('home-page').classList.add('active');
+                    document.querySelector('.nav-link[href="#home"]').classList.add('active');
+                }
+
+                if (targetLink) {
+                    targetLink.classList.add('active');
+                }
+            }
+
+            /**
+             * Handle form submission.
+             */
+            contactForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent the form from submitting normally
+
+                submitButton.textContent = 'Sending...';
+                submitButton.disabled = true;
+                formMessage.classList.add('hidden');
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    submitButton.textContent = 'Send Message';
+                    submitButton.disabled = false;
+                    
+                    formMessage.classList.remove('hidden');
+                    formMessage.classList.remove('opacity-0');
+                    formMessage.classList.add('bg-green-100', 'text-green-700', 'opacity-100');
+                    formMessage.textContent = 'Your message has been sent successfully!';
+                    contactForm.reset();
+
+                    // Hide the message after 5 seconds
+                    setTimeout(() => {
+                        formMessage.classList.add('hidden', 'opacity-0');
+                    }, 5000);
+                }, 1500);
+            });
+
+            // Handle initial page load and hash changes
+            const handleHashChange = () => {
+                const pageId = window.location.hash.substring(1) || 'home';
+                showPage(pageId);
+            };
+
+            // Set up initial page view
+            handleHashChange();
+
+            // Listen for hash changes to update the page
+            window.addEventListener('hashchange', handleHashChange);
+
+            // Gemini API Integration for drafting messages
+            draftButton.addEventListener('click', async () => {
+                const userRequest = draftRequestInput.value;
+                if (!userRequest) {
+                    draftStatus.textContent = 'Please enter a brief request first.';
+                    return;
+                }
+
+                draftButton.textContent = 'Generating...';
+                draftButton.disabled = true;
+                draftStatus.textContent = '';
+                draftStatus.classList.remove('text-red-500');
+                draftStatus.classList.add('text-gray-500');
+
+                const systemPrompt = "You are an AI assistant for a VoIP company named Semasana. Your task is to draft a formal and professional email on behalf of a customer. Be concise and polite. Do not include a subject line.";
+                const userQuery = `Draft an email based on this request: "${userRequest}"`;
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
+                
+                let retries = 3;
+                while (retries > 0) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        const generatedText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                        
+                        if (generatedText) {
+                            messageTextarea.value = generatedText.trim();
+                            draftStatus.textContent = 'Message drafted successfully!';
+                        } else {
+                            draftStatus.textContent = 'Could not generate a message. Please try again.';
+                            draftStatus.classList.remove('text-gray-500');
+                            draftStatus.classList.add('text-red-500');
+                        }
+                        
+                        break; // Exit the loop on success
+                    } catch (error) {
+                        console.error('API call failed:', error);
+                        retries--;
+                        if (retries > 0) {
+                            await new Promise(resolve => setTimeout(resolve, 2000)); // Exponential backoff
+                        } else {
+                            draftStatus.textContent = 'Failed to generate a message. Please write your message manually.';
+                            draftStatus.classList.remove('text-gray-500');
+                            draftStatus.classList.add('text-red-500');
+                        }
+                    }
+                }
+
+                draftButton.textContent = 'Help Me Draft My Message ✨';
+                draftButton.disabled = false;
+            });
+            
+            // Gemini API Integration for pricing plan recommendations
+            recommendButton.addEventListener('click', async () => {
+                const teamSize = teamSizeInput.value;
+                const internationalMinutes = internationalMinutesInput.value;
+                
+                if (!teamSize || !internationalMinutes) {
+                    recommendationResult.textContent = 'Please fill out both fields to get a recommendation.';
+                    recommendationResult.classList.remove('hidden', 'bg-green-100');
+                    recommendationResult.classList.add('bg-red-100', 'text-red-700', 'opacity-100');
+                    return;
+                }
+
+                recommendButton.textContent = 'Analyzing...';
+                recommendButton.disabled = true;
+                recommendationResult.textContent = '';
+                recommendationResult.classList.add('hidden', 'opacity-0');
+
+                const systemPrompt = "You are an AI assistant for a VoIP company named Semasana. Your task is to recommend the best pricing plan for a user based on their needs. The plans are: Starter ($9.99/month for unlimited local calls, 100 international minutes, basic call forwarding, standard customer support), Pro ($19.99/month for unlimited local calls, 300 international minutes, team collaboration, advanced analytics, priority support), Enterprise ($49.99/month for unlimited everything within Africa, 1000 international minutes, dedicated account manager, API access, 24/7 premium support). Based on the user's input, recommend the single best plan. Be brief and only provide the plan name and a single, concise sentence explaining why it's the best fit.";
+                const userQuery = `My team has ${teamSize} employees and needs around ${internationalMinutes} international minutes per month.`;
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
+
+                let retries = 3;
+                while (retries > 0) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        const generatedText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                        
+                        if (generatedText) {
+                            recommendationResult.innerHTML = `<h4 class="font-semibold mb-1 text-lg">Recommended Plan</h4><p>${generatedText.trim()}</p>`;
+                            recommendationResult.classList.remove('hidden', 'bg-red-100');
+                            recommendationResult.classList.add('bg-blue-100', 'text-blue-700', 'opacity-100');
+                        } else {
+                            recommendationResult.textContent = 'Could not generate a recommendation. Please try again.';
+                            recommendationResult.classList.remove('hidden', 'bg-blue-100');
+                            recommendationResult.classList.add('bg-red-100', 'text-red-700', 'opacity-100');
+                        }
+                        
+                        break;
+                    } catch (error) {
+                        console.error('API call failed:', error);
+                        retries--;
+                        if (retries > 0) {
+                            await new Promise(resolve => setTimeout(resolve, 2000));
+                        } else {
+                            recommendationResult.textContent = 'Failed to get a recommendation. Please contact support.';
+                            recommendationResult.classList.remove('hidden', 'bg-blue-100');
+                            recommendationResult.classList.add('bg-red-100', 'text-red-700', 'opacity-100');
+                        }
+                    }
+                }
+                
+                recommendButton.textContent = 'Find My Perfect Plan ✨';
+                recommendButton.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
